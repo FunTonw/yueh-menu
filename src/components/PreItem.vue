@@ -2,22 +2,34 @@
   <div class="bg-white rounded-3" style="width: 90vw;">
     <div class="bg-white p-2 m-3">
       <div class="d-flex flex-column lh-1">
-        <p class="fs-4 mb-2">古早味飯糰</p>
+        <p class="fs-4 mb-2">{{item.title}}</p>
         <div class="topping-list lh-1">
           <!-- 這邊會先有原本的配料，之後再加上點擊的配料 -->
-          <span>+ 海苔絲</span>
-          <span>+ 鹹蛋黃</span>
-          <span>+ 蔥蛋</span>
-                    <span>+ 海苔絲</span>
-          <span>+ 鹹蛋黃</span>
-          <span>+ 蔥蛋</span>
-                    <span>+ 海苔絲</span>
-          <span>+ 鹹蛋黃</span>
-          <span>+ 蔥蛋</span>
+          <span v-for="item, index in toppings" :key="index">+ {{item}}</span>
         </div>
         <hr class="text-success rounded-1 m-1" style="padding-top: 3px;">
-        <p class="total align-self-end fs-2">$ 120</p>
+        <p class="total align-self-end fs-2">$ {{price}}</p>
       </div>
     </div>
   </div>
 </template>
+
+<script>
+
+export default {
+  data() {
+    return {
+      item: {},
+      toppings: [],
+      price: 0,
+    };
+  },
+  created() {
+    this.$emitter.on('getItem', (val) => {
+      this.item = val;
+      this.toppings = val.toppings;
+      this.price = val.price;
+    });
+  }
+}
+</script>

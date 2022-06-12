@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-      <ProductsPage :Products="main" />
+      <ProductsPage />
       <PreItem /> 
       <PreProducts />
   </div>
@@ -15,24 +15,7 @@ import PreProducts from "@/components/PreProducts.vue";
     components: { ProductsPage, PreItem, PreProducts },
     data() {
         return {
-            main: [],
-            toppings: [],
         };
     },
-    methods: {
-        getdata() {
-            fetch("https://cors-product.herokuapp.com/https://yueh-menu.herokuapp.com/api/products/")
-                .then(res => res.json())
-                .then((require) => {
-                let data = require.data;
-                this.main = data.main;
-                this.toppings = data.topping;
-            })
-                .catch(error => console.log("error", error));
-        }
-    },
-    created() {
-        this.getdata();
-    }
 }
 </script>

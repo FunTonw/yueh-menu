@@ -7,7 +7,7 @@
             <div class="container">
               <div class="row row-cols-3 g-3">
                 <div class="col" v-for="item in page" :key="item.id">
-                <button type="button" class="btn btn-outline-primary border border-3 rounded-2 w-100" style="height:90px" >
+                <button type="button" class="btn btn-outline-primary border border-3 rounded-2 w-100" style="height:90px" v-on:click="selectorItem(item, item.type)">
                   <span>{{ item.title }}</span>
                 </button>
                 </div>
@@ -18,6 +18,7 @@
         </div>
     <div>
       <button class="btn btn-outline-primary py-1" v-on:click="send">送出</button>
+      <button class="btn btn-outline-danger py-1" v-on:click="send">清除</button>
     </div>
   </div>
 
@@ -42,32 +43,60 @@ export default {
     return {
       items: [],
       carousel: {},
+      products: [],
+      toppings: [],
+      preitem: {},
     };
   },
   methods: {
+    getdata() {
+        fetch("https://cors-product.herokuapp.com/https://yueh-menu.herokuapp.com/api/products/")
+            .then(res => res.json())
+            .then((require) => {
+            let data = require.data;
+            this.products = data.main;
+            this.toppings = data.topping;
+            this.uploadbtn(this.products);
+        })
+            .catch(error => console.log("error", error));
+    },
+    selectorItem(item, type) {
+      console.log(type);
+      if (type) {
+        this.preitem = item;
+        this.uploadbtn(this.toppings, type);
+      } else {
+        this.preitem.toppings.push(item.title);
+        this.preitem.price += item.price;
+      }
+      this.$emitter.emit('getItem', this.preitem);
+    },
+    uploadbtn(items, type) {
+      this.items = [];
+      let val = (type) ? items[type] : items;
+      // 若btn超過9個, 就以9個為單位 拆分頁數
+        if (val.length > 9) {
+          for (let i = 0; i < val.length ; i += 9) {
+            this.items.push(val.slice(i,i+9))
+          }
+        } else {
+          this.items.push(val);
+        }
+    },
     send() {
+      this.preitem = {},
       console.log('送出');
     },
   },
-  watch: {
-    Products: function() {
-      console.log(this.Products);
-        if (this.Products.length > 9) {
-          for (let i = 0; i < this.Products.length ; i += 9) {
-            this.items.push(this.Products.slice(i,i+9))
-          }
-        } else {
-          this.items = this.Products;
-        }
-    }
+  created() {
+    this.getdata();
   },
   mounted() {
+    //啟動輪播
    this.carousel = new Carousel(this.$refs.myCarousel);
    },
   updated() {
-    console.log(this.$refs.inner.childNodes, {
-      interval: false,
-    })
+    //先執行輪播的第一頁
     this.$refs.inner.childNodes[1].classList.add('active');
   }
 }
