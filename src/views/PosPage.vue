@@ -1,8 +1,8 @@
 <template>
   <div class="container">
-      <ProductsPage />
+      <ProductsPage @pushpreitem="getPreProducts" />
       <PreItem /> 
-      <PreProducts />
+      <PreProducts :PreProducts="preProductsAry" />
   </div>
 </template>
 
@@ -15,7 +15,13 @@ import PreProducts from "@/components/PreProducts.vue";
     components: { ProductsPage, PreItem, PreProducts },
     data() {
         return {
+          preProductsAry: [],
         };
+    },
+    methods: {
+      getPreProducts(preitem) {
+        this.preProductsAry.push(preitem);
+      }
     },
 }
 </script>

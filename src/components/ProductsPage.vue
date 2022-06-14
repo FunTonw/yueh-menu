@@ -61,9 +61,8 @@ export default {
             .catch(error => console.log("error", error));
     },
     selectorItem(item, type) {
-      console.log(type);
       if (type) {
-        this.preitem = item;
+        this.preitem = JSON.parse(JSON.stringify(item));
         this.uploadbtn(this.toppings, type);
       } else {
         this.preitem.toppings.push(item.title);
@@ -84,8 +83,10 @@ export default {
         }
     },
     send() {
+      this.$emit('pushpreitem', this.preitem);
       this.preitem = {},
-      console.log('送出');
+      this.uploadbtn(this.products);
+      this.$emitter.emit('getItem', this.preitem);
     },
   },
   created() {
@@ -96,7 +97,12 @@ export default {
    this.carousel = new Carousel(this.$refs.myCarousel);
    },
   updated() {
-    //先執行輪播的第一頁
+    // 每次選擇會active第一頁
+    this.$refs.inner.childNodes.forEach(element => {
+      if (element.classList){
+        element.classList.remove('active');
+      }
+    });
     this.$refs.inner.childNodes[1].classList.add('active');
   }
 }
