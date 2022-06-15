@@ -85,7 +85,6 @@ export default {
       }
     },
     pushReItem() {
-      console.log(this.reItem);
       this.$emit('getReItem', this.reItem);
       this.reItem = {};
     },

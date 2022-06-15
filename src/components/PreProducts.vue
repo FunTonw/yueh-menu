@@ -46,7 +46,7 @@
       </li>
     </ul>
   </div>
-  <ReloadModal ref="reloadModal" :reloadItem="pushItem" @getReItem="pullReItem()"/>
+  <ReloadModal ref="reloadModal" :reloadItem="pushItem" @getReItem="pullReItem"/>
 </div>
 </template>
 
@@ -78,14 +78,20 @@ export default {
     };
   },
   methods: {
-    // getPreProducts() {
-    //   this.$emitter.on('pushpreitem', val => {
-    //     this.PreProducts = val;
-    //   })
-    // },
+    getPreProducts() {
+    this.$emitter.on('pushpreitem', val => {
+      this.PreProducts.push(val);
+    })
+    },
     pullReItem(val) {
-      console.log(val);
-      console.log(this.PreProducts);
+      this.PreProducts.forEach((ele, index) => {
+        //如果可以 break; 最好
+        console.log(ele.productId)
+        if(ele.productId === val.productId) {
+          this.PreProducts.splice(index, 1, val);
+        }
+      })
+      this.$refs.reloadModal.hideModal();
     },
     del() {
       console.log('del');
@@ -96,9 +102,7 @@ export default {
     },
   },
   created() {
-    this.$emitter.on('pushpreitem', val => {
-      this.PreProducts.push(val);
-    })
+    this.getPreProducts();
   }
 }
 </script>

@@ -87,6 +87,7 @@ export default {
         }
     },
     send() {
+      this.preitem.productId = new Date().getTime();
       this.$emitter.emit('pushpreitem', this.preitem);
       this.preitem = {},
       this.uploadbtn(this.products);
