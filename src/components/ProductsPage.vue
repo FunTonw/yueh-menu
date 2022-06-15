@@ -1,4 +1,5 @@
 <template>
+  <div>
     <div class="bg-white p-3 rounded-3" style="width: 90vw;">
       <div class="d-flex flex-column justify-content-between align-items-center" style=" height: 45vh;">
        <div class="carousel slide h-100 w-100 carousel-dark " ref="myCarousel" id="myCarousel">
@@ -21,9 +22,8 @@
       <button class="btn btn-outline-danger py-1" v-on:click="send">清除</button>
     </div>
   </div>
-
   </div>
-
+  </div>
 </template>
 
 <style scoped leng="scss">
@@ -33,11 +33,9 @@
 </style>
 
 <script>
-
 import Carousel from 'bootstrap/js/dist/carousel';
 
 export default {
-  
   props: ['Products'],
   data() {
     return {
@@ -65,9 +63,11 @@ export default {
         this.preitem = JSON.parse(JSON.stringify(item));
         this.uploadbtn(this.toppings, type);
       } else {
-        if (this.preitem.toppings.isArray){
-          this.preitem.toppings.push(item.title);
+        //判斷如果 點擊toppings按鈕時，是選擇drink的topping(冰熱),就改為字串
+        if (this.preitem.toppings instanceof Array){
+          this.preitem.addToppings.push(item.title);
           this.preitem.price += item.price;
+          console.log(this.preitem.addToppings)
         } else {
           this.preitem.toppings = item.title;
         }
