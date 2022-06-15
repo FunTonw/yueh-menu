@@ -87,7 +87,7 @@ export default {
         }
     },
     send() {
-      this.$emit('pushpreitem', this.preitem);
+      this.$emitter.emit('pushpreitem', this.preitem);
       this.preitem = {},
       this.uploadbtn(this.products);
       this.$emitter.emit('getItem', this.preitem);

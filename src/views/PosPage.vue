@@ -2,7 +2,7 @@
   <div class="container">
       <ProductsPage @pushpreitem="getPreProducts" />
       <PreItem /> 
-      <PreProducts :PreProducts="preProductsAry" />
+      <PreProducts />
   </div>
 </template>
 
