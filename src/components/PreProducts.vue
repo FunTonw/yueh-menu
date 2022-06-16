@@ -38,7 +38,7 @@
             </div>
           </SwiperSlide>
           <SwiperSlide>
-              <button style="height:92px" class="btn btn-danger w-100 mb-1" v-on:click="del()">
+              <button style="height:92px" class="btn btn-danger w-100 mb-1" v-on:click="del(item)">
                 <i class="fa-solid fa-trash-can"></i>
               </button>
           </SwiperSlide>
@@ -93,8 +93,13 @@ export default {
       })
       this.$refs.reloadModal.hideModal();
     },
-    del() {
+    del(val) {
       console.log('del');
+      let index = this.PreProducts.findIndex((ele) => {
+        //如果可以 break; 最好
+        ele.productId === val.productId
+      })
+      this.PreProducts.splice(index, 1);
     },
     reload(item) {
       this.pushItem = item;
