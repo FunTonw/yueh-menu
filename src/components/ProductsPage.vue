@@ -55,7 +55,7 @@ export default {
             this.products = data.main;
             this.toppings = data.topping;
             this.uploadbtn(this.products);
-        })
+            })
             .catch(error => console.log("error", error));
     },
     selectorItem(item, type) {

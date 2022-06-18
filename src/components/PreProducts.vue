@@ -45,8 +45,9 @@
       </li>
     </ul>
   </div>
-  <div class="bg-white rounded-3 p-3 py-1 d-flex justify-content-end" v-if="this.PreProducts.length > 0 ">
-    <h2 class="m-0">總額 : {{Total()}} 元</h2>
+  <div class="bg-white rounded-3 p-3 py-1 d-flex justify-content-between" v-if="this.PreProducts.length > 0 ">
+    <button class="btn btn-danger" @click="postPreProducts()">確認訂單</button>
+    <h2 class="m-0" style="line-height: unset;">總額 : {{countPrice}} 元</h2>
   </div>
   <ReloadModal ref="reloadModal" :reloadItem="pushItem" @getReItem="pullReItem"/>
 </div>
@@ -79,13 +80,34 @@ export default {
       PreProducts: [],
     };
   },
-  methods: {
-    Total() {
+  computed: {
+    countPrice: function() {
       let price = 0;
       this.PreProducts.forEach(ele => {
-      price += ele.price;
-    });
+        price += ele.price;
+      });
       return price
+    }
+  },
+  methods: {
+    postPreProducts() {
+      let url ="https://cors-product.herokuapp.com/https://yueh-menu.herokuapp.com/numberapi/number/main";
+      let myHeaders = new Headers();
+      myHeaders.append("Content-Type", "application/json");
+      let raw = JSON.stringify({products: [...this.PreProducts], total: this.countPrice});
+      
+      var requestOptions = {
+        method: 'POST',
+        headers: myHeaders,
+        body: raw,
+      };
+      fetch(url, requestOptions)
+        .then(response => response.text())
+        .then(result =>{
+          console.log(result)
+          this.PreProducts = [];
+        })
+        .catch(error => console.log('error', error));
     },
     getPreProducts() {
     this.$emitter.on('pushpreitem', val => {
