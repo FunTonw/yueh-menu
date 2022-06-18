@@ -1,10 +1,9 @@
 <template>
 <div>
-  <div class="bg-white rounded-3 p-3 overflow-scroll" style="width: 90vw; height: 25vh">
+  <div class="bg-white rounded-3 p-3 overflow-scroll mb-3" style="width: 90vw; height: 25vh">
     <ul class="p-0">
       <li v-for="item, index in PreProducts" :key="index">
         <Swiper
-        :autoHeight="true"
         :grabCursor="true"
         :effect="'creative'"
         :creativeEffect="{
@@ -46,6 +45,9 @@
       </li>
     </ul>
   </div>
+  <div class="bg-white rounded-3 p-3 d-flex justify-content-end" v-if="this.PreProducts.length > 0 ">
+    <h2>Total : {{Total()}}</h2>
+  </div>
   <ReloadModal ref="reloadModal" :reloadItem="pushItem" @getReItem="pullReItem"/>
 </div>
 </template>
@@ -61,11 +63,11 @@ import ReloadModal from '../views/ReloadModal.vue';
   import { EffectCreative } from "swiper";
 
 export default {
-  setup() {
-    return {
-      modules: [EffectCreative],
-    };
-  },
+      setup() {
+      return {
+        modules: [EffectCreative],
+      };
+      },
   components :{
     ReloadModal,
     Swiper,
@@ -78,6 +80,13 @@ export default {
     };
   },
   methods: {
+    Total() {
+      let price = 0;
+      this.PreProducts.forEach(ele => {
+      price += ele.price;
+    });
+      return price
+    },
     getPreProducts() {
     this.$emitter.on('pushpreitem', val => {
       this.PreProducts.push(val);
@@ -86,7 +95,6 @@ export default {
     pullReItem(val) {
       this.PreProducts.forEach((ele, index) => {
         //如果可以 break; 最好
-        console.log(ele.productId)
         if(ele.productId === val.productId) {
           this.PreProducts.splice(index, 1, val);
         }
@@ -94,12 +102,11 @@ export default {
       this.$refs.reloadModal.hideModal();
     },
     del(val) {
-      console.log('del');
       let index = this.PreProducts.findIndex((ele) => {
         //如果可以 break; 最好
         ele.productId === val.productId
       })
-      this.PreProducts.splice(index, 1);
+      this.PreProducts.splice(index-1, 1);
     },
     reload(item) {
       this.pushItem = item;
