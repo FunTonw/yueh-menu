@@ -45,8 +45,8 @@
       </li>
     </ul>
   </div>
-  <div class="bg-white rounded-3 p-3 d-flex justify-content-end" v-if="this.PreProducts.length > 0 ">
-    <h2>Total : {{Total()}}</h2>
+  <div class="bg-white rounded-3 p-3 py-1 d-flex justify-content-end" v-if="this.PreProducts.length > 0 ">
+    <h2 class="m-0">總額 : {{Total()}} 元</h2>
   </div>
   <ReloadModal ref="reloadModal" :reloadItem="pushItem" @getReItem="pullReItem"/>
 </div>
@@ -56,7 +56,7 @@
 </style>
 
 <script>
-import ReloadModal from '../views/ReloadModal.vue';
+  import ReloadModal from '../views/ReloadModal.vue';
   import { Swiper, SwiperSlide } from 'swiper/vue';
   import 'swiper/css';
   import "swiper/css/effect-creative";

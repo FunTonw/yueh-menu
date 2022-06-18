@@ -7,9 +7,9 @@ const routes = [
     component: () => import('../views/PosPage.vue')
   },
   {
-    path: '/about',
-    name: 'about',
-    component: () => import('../views/AboutView.vue')
+    path: '/numberpage',
+    name: 'numberpage',
+    component: () => import('../views/NumberPage.vue')
   }
 ]
 

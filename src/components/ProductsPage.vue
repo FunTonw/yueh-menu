@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="bg-white p-3 rounded-3" style="width: 90vw;">
+    <div class="bg-white p-3 rounded-bottom" style="width: 90vw;">
       <div class="d-flex flex-column justify-content-between align-items-center" style=" height: 45vh;">
        <div class="carousel slide h-100 w-100 carousel-dark " ref="myCarousel" id="myCarousel">
           <div class="carousel-inner" ref="inner">
