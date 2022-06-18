@@ -17,9 +17,9 @@
             </div>
           </div>
         </div>
-    <div>
+    <div v-if="Object.keys(this.preitem).length != 0">
       <button class="btn btn-outline-primary py-1" v-on:click="send">送出</button>
-      <button class="btn btn-outline-danger py-1" v-on:click="send">清除</button>
+      <button class="btn btn-outline-danger py-1" v-on:click="clear()">清除</button>
     </div>
   </div>
   </div>
@@ -89,9 +89,12 @@ export default {
     send() {
       this.preitem.productId = new Date().getTime();
       this.$emitter.emit('pushpreitem', this.preitem);
-      this.preitem = {},
-      this.uploadbtn(this.products);
+      this.clear();
+    },
+    clear() {
+      this.preitem = {};
       this.$emitter.emit('getItem', this.preitem);
+      this.uploadbtn(this.products);
     },
   },
   created() {
