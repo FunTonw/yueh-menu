@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div>
       <ProductsPage @pushpreitem="getPreProducts" />
       <PreItem /> 
       <PreProducts />
