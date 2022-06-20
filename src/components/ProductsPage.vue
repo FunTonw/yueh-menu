@@ -9,7 +9,7 @@
               <div class="row row-cols-3 g-3">
                 <div class="col" v-for="item in page" :key="item.id">
                 <button type="button" class="btn btn-outline-primary border border-3 rounded-2 w-100" style="height:90px" v-on:click="selectorItem(item, item.type)">
-                  <span>{{ item.title }}</span>
+                  <span class="text-dark">{{ item.title }}</span>
                 </button>
                 </div>
               </div>

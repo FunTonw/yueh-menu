@@ -1,8 +1,12 @@
 @import '_reset.scss';
 
 body {
-  background: linear-gradient(rgba(65, 215, 75, 0.784), rgb(177, 244, 148));
+  background: linear-gradient(rgb(209, 209, 209), rgba(127, 126, 130, 0.784));
   height: 100vh;
   display: flex;
   justify-content: center;
+}
+
+.yu-color {
+  color: grey;
 }
