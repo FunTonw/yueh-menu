@@ -1,10 +1,20 @@
 <template>
-  <div>
-      <ProductsPage @pushpreitem="getPreProducts" />
-      <PreItem /> 
-      <PreProducts />
+  <div class="container p-0">
+    <div class="row">
+      <div class="col-12 col-lg-8">
+        <ProductsPage @pushpreitem="getPreProducts" />
+      </div>
+      <div class="col-12 col-lg-4">
+        <PreItem /> 
+        <PreProducts />
+      </div>
+    </div>
   </div>
 </template>
+
+<style>
+  
+</style>
 
 <script>
 import ProductsPage from '@/components/ProductsPage.vue';

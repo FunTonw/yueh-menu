@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <div class=" bg-white rounded-bottom p-3 overflow-scroll" style="width: 90vw; height: 85vh;">
+<div class="container p-0">
+    <div class=" bg-white rounded-bottom p-3 overflow-scroll" style="height: 85vh;">
       <div class="d-flex flex-column-reverse">
     <div class="card mb-3" v-for="product, index in main" :key="index">
       <div class="card-body" @click="paidToggle(product)">
@@ -43,8 +43,8 @@
         今日營業額：{{Turnover}}元
       </p>
     </div>
-  </div>
-  
+</div>
+
 </template>
 
 <script>

@@ -1,6 +1,6 @@
 <template>
 <div>
-  <div class="bg-white rounded-3 p-3 overflow-scroll mb-3" style="width: 90vw; height: 25vh">
+  <div class="bg-white rounded-3 p-3 overflow-scroll mb-3 pre-products-table">
     <ul class="p-0">
       <li v-for="item, index in PreProducts" :key="index">
         <Swiper
@@ -22,8 +22,8 @@
         :modules="modules">
           <SwiperSlide>
             <div class="d-flex flex-column lh-1" v-on:click="reload(item)">
-              <p class="fs-4 mb-2"><span>{{parseInt(index) + 1}}.</span>{{item.title + ((!item.count) ? ' 1 顆' :`${item.count} 顆`)}}</p>
-              <div class="topping-list lh-1">
+              <p class="fs-5 mb-2"><span>{{parseInt(index) + 1}}.</span>{{item.title + ((!item.count) ? ' 1 顆' :`${item.count} 顆`)}}</p>
+              <div class="topping-list lh-1 fs-6">
                 <!-- 這邊會先有原本的配料，之後再加上點擊的配料 -->
                 <span v-for="topping, num in item.toppings" :key="num">
                   + {{topping}}
@@ -33,7 +33,7 @@
                 </span>
               </div>
               <hr class="text-success rounded-1 m-1" style="padding-top: 3px;">
-              <p class="total align-self-end fs-2">$ {{item.price}}</p>
+              <p class="total align-self-end fs-4">$ {{item.price}}</p>
             </div>
           </SwiperSlide>
           <SwiperSlide>
@@ -45,15 +45,23 @@
       </li>
     </ul>
   </div>
-  <div class="bg-white rounded-3 p-3 py-1 d-flex justify-content-between" v-if="this.PreProducts.length > 0 ">
+  <div class="bg-white rounded-3 p-3 py-1 py-lg-3 d-flex justify-content-between" v-if="this.PreProducts.length > 0 ">
     <button class="btn btn-danger" @click="postPreProducts()">確認訂單</button>
-    <h2 class="m-0" style="line-height: unset;">總額 : {{countPrice}} 元</h2>
+    <h2 class="m-0 fs-4" style="line-height: unset;">總額 : {{countPrice}} 元</h2>
   </div>
   <ReloadModal ref="reloadModal" :reloadItem="pushItem" @getReItem="pullReItem"/>
 </div>
 </template>
 
 <style>
+  .pre-products-table {
+    height:23vh;
+  }
+  @media screen and (min-width: 992px){
+    .pre-products-table {
+      height: 60vh;
+    }
+  }
 </style>
 
 <script>

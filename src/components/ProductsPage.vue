@@ -1,7 +1,7 @@
 <template>
-  <div>
-    <div class="bg-white p-3 rounded-bottom" style="width: 90vw;">
-      <div class="d-flex flex-column justify-content-between align-items-center" style=" height: 45vh;">
+<div>
+    <div class="bg-white p-3 rounded-bottom page-table">
+      <div class="d-flex flex-column justify-content-between align-items-center ">
        <div class="carousel slide h-100 w-100 carousel-dark " ref="myCarousel" id="myCarousel">
           <div class="carousel-inner" ref="inner">
             <div class="carousel-item" v-for="page in items" :key="page.id">
@@ -23,12 +23,22 @@
     </div>
   </div>
   </div>
-  </div>
+</div>
+
 </template>
 
 <style scoped leng="scss">
   form {
     font-size: 20px;
+  }
+  .page-table{
+    height: 45vh;
+  }
+  @media screen and (min-width: 992px){
+    .page-table{
+      height: 85vh;
+       border-top-right-radius: 0.25rem ;
+    }
   }
 </style>
 
