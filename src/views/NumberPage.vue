@@ -1,6 +1,8 @@
 <template>
 <div class="container p-0">
-    <div class=" bg-white rounded-bottom p-3 overflow-scroll" style="height: 85vh;">
+  <div class="row g-1">
+    <div class=" col-12 col-lg-8">
+    <div class=" bg-white rounded-bottom p-3 overflow-scroll number-rounded" style="height: 85vh;">
       <div class="d-flex flex-column-reverse">
     <div class="card mb-3" v-for="product, index in main" :key="index">
       <div class="card-body" @click="paidToggle(product)">
@@ -38,14 +40,32 @@
     </div>
   </div>
     </div>
-    <div class="bg-white rounded mt-1 p-3">
+    </div>
+    <div class="col-12 col-lg-4">
+    <div class="bg-white rounded mt-1 m-lg-0 p-3">
       <p class="fs-3 m-0">
         今日營業額：{{Turnover}}元
       </p>
     </div>
+    </div>
+  </div>
 </div>
 
 </template>
+
+<style>
+.number-rounded{
+  border-top-left-radius: 0.25rem !important;
+}
+@media screen and (min-width: 992px) {
+  .number-rounded {
+    border-top-right-radius: 0.25rem !important;
+    border-bottom-right-radius: 0.25rem !important;
+    border-top-left-radius: 0.25rem !important;
+    border-bottom-left-radius: 0rem !important;
+  }
+}
+</style>
 
 <script>
 export default {

@@ -1,7 +1,7 @@
 <template>
 <div>
-    <div class="bg-white p-3 rounded-bottom page-table">
-      <div class="d-flex flex-column justify-content-between align-items-center ">
+    <div class="bg-white rounded-bottom page-rounded">
+      <div class="d-flex flex-column justify-content-between align-items-center page-table p-3">
        <div class="carousel slide h-100 w-100 carousel-dark " ref="myCarousel" id="myCarousel">
           <div class="carousel-inner" ref="inner">
             <div class="carousel-item" v-for="page in items" :key="page.id">
@@ -34,10 +34,13 @@
   .page-table{
     height: 45vh;
   }
+  .page-rounded{
+    border-top-right-radius: 0.25rem !important
+  }
   @media screen and (min-width: 992px){
     .page-table{
-      height: 85vh;
-       border-top-right-radius: 0.25rem ;
+      min-height: 85vh;
+      border-top-right-radius: 0.25rem 
     }
   }
 </style>
