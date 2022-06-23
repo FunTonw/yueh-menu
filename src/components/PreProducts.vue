@@ -10,12 +10,12 @@
           prev: {
             shadow: true,
             origin: 'left center',
-            translate: ['-5%', 0, -200],
+            translate: ['-5%', 0, -900],
             rotate: [0, 100, 0],
           },
           next: {
             origin: 'right center',
-            translate: ['5%', 0, -200],
+            translate: ['5%', 0, -900],
             rotate: [0, -100, 0],
           },
         }"

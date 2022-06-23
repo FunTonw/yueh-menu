@@ -1,29 +1,31 @@
 <template>
-<div>
-    <div class="bg-white rounded-bottom page-rounded">
-      <div class="d-flex flex-column justify-content-between align-items-center page-table p-3">
-       <div class="carousel slide h-100 w-100 carousel-dark " ref="myCarousel" id="myCarousel">
-          <div class="carousel-inner" ref="inner">
-            <div class="carousel-item" v-for="page in items" :key="page.id">
-            <div class="container">
-              <div class="row row-cols-3 g-3">
-                <div class="col" v-for="item in page" :key="item.id">
+  <div class="bg-white rounded-bottom page-rounded">
+    <div class="page-table p-3">
+      <div class="carousel slide h-100 w-100 carousel-dark " ref="myCarousel" id="myCarousel">
+        <div class="carousel-inner" ref="inner">
+          <div class="carousel-item" v-for="page in items" :key="page.id">
+          <div class="container">
+            <div class="row row-cols-3 g-3">
+              <div class="col" v-for="item in page" :key="item.id">
                 <button type="button" class="btn btn-outline-primary border border-3 rounded-2 w-100" style="height:90px" v-on:click="selectorItem(item, item.type)">
                   <span class="text-dark">{{ item.title }}</span>
                 </button>
-                </div>
-              </div>
               </div>
             </div>
           </div>
+          </div>
         </div>
-    <div v-if="Object.keys(this.preitem).length != 0">
+      </div>
+    </div>
+    <div class="d-flex justify-content-center align-items-center py-3" v-if="Object.keys(this.preitem).length != 0">
       <button class="btn btn-outline-primary py-1" v-on:click="send">送出</button>
       <button class="btn btn-outline-danger py-1" v-on:click="clear()">清除</button>
     </div>
+    <div class="d-flex justify-content-center align-items-center py-3" v-else>
+      <button class="btn btn-outline-muted py-1 mr-2" v-on:click="send" disabled>送出</button>
+      <button class="btn btn-outline-muted py-1" v-on:click="clear()" disabled>清除</button>
+    </div>
   </div>
-  </div>
-</div>
 
 </template>
 
