@@ -13,23 +13,10 @@
                 {{(reItem.type === 'riceball') ? '飯糰類型' : '飲料類型' }}
               </label>
               <h1>{{reItem.title}}</h1>
-              <!-- <select class="form-select" id="item-title" v-model="reItem">
-                <option selected :value="reItem">{{reItem.title}}</option>
-                <template v-for="product in data.main">
-                <option :key = "product.id" v-if="product.type === reItem.type && product.title !== reItem.title" :value="product" >{{product.title}}</option>
-                </template>
-              </select> -->
             </div>
             <div>
             </div>
-            <div class="mb-2">
-              <h2>原料</h2>
-              <div class="form-check form-check-inline" v-for="topping, index in reloadItem.toppings" :key="index">
-                <input class="form-check-input" type="checkbox" :value="topping" :id="`toppingCheck${index}`" v-model="reItem.toppings">
-                <label :for="`toppingCheck${index}`">{{topping}}</label>
-              </div>
-            </div>
-            <div class="mb-2">
+            <div class="mb-2" v-if="reItem.type === 'riceball'">
               <h2>加料</h2>
             <div class="form-check form-check-inline" v-for="toppings, index in data.topping.riceball" :key="index">
               <input class="form-check-input" type="checkbox" :value="toppings.title" :id="`addToppingCheck${index}`" v-model="reItem.addToppings"
@@ -39,6 +26,21 @@
               </label>
             </div>
             </div>
+            <div class="mb-2" v-else>
+               <h2>加料</h2>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" value="冰" id="Ice" v-model="reItem.addToppings">
+                <label class="form-check-label" for="Ice">
+                  冰
+                </label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" value="熱" id="Hot" v-model="reItem.addToppings">
+                <label class="form-check-label" for="Hot">
+                  熱
+                </label>
+              </div>
+            </div>
             <div class="mb-2">
               <label for="item-price">價格</label>
               <p>{{reItem.price}}</p>
@@ -47,7 +49,7 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" @click="hideModal()">關閉</button>
-          <button type="button" class="btn btn-primary" @click="pushReItem()">Save changes</button>
+          <button type="button" class="btn btn-primary" @click="pushReItem()">更改</button>
         </div>
       </div>
     </div>

@@ -84,7 +84,7 @@ export default {
           this.preitem.price += item.price;
           console.log(this.preitem.addToppings)
         } else {
-          this.preitem.toppings = item.title;
+          this.preitem.addToppings = item.title;
         }
       }
       this.$emitter.emit('getItem', this.preitem);

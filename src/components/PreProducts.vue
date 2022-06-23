@@ -24,10 +24,6 @@
             <div class="d-flex flex-column lh-1" v-on:click="reload(item)">
               <p class="fs-5 mb-2"><span>{{parseInt(index) + 1}}.</span>{{item.title + ((!item.count) ? ' 1 顆' :`${item.count} 顆`)}}</p>
               <div class="topping-list lh-1 fs-6">
-                <!-- 這邊會先有原本的配料，之後再加上點擊的配料 -->
-                <span v-for="topping, num in item.toppings" :key="num">
-                  + {{topping}}
-                </span>
                  <span v-for="topping, num in item.addToppings" :key="num">
                   + {{topping}}
                 </span>
