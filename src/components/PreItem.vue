@@ -1,8 +1,8 @@
 <template>
-  <div class="bg-white rounded-3 ">
+  <div class="bg-white rounded-3">
     <div class="
     bg-white p-2 m-3
-    m-lg-0 mb-lg-1  rounded-bottom">
+    m-lg-0 mb-lg-1  rounded-bottom preitem-rounded">
       <div class="d-flex flex-column lh-1">
         <p class="fs-4 mb-2">{{item.title}}</p>
         <div class="topping-list lh-1">
@@ -13,8 +13,16 @@
       </div>
     </div>
   </div>
-
 </template>
+
+<style>
+@media screen and (min-width: 992px) {
+  .preitem-rounded {
+    border-top-right-radius: 0.25rem !important;
+    border-top-left-radius: 0.25rem !important;
+  }
+}
+</style>
 
 <script>
 
