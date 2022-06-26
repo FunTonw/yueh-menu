@@ -2,7 +2,7 @@
   <div class="container p-0">
     <div class="row">
       <div class="col-12 col-lg-8">
-        <ProductsPage @pushpreitem="getPreProducts" />
+        <ProductsPage />
       </div>
       <div class="col-12 col-lg-4">
         <PreItem /> 
@@ -23,15 +23,6 @@ import PreProducts from "@/components/PreProducts.vue";
 
   export default {
     components: { ProductsPage, PreItem, PreProducts },
-    data() {
-        return {
-          preProductsAry: [],
-        };
-    },
-    methods: {
-      getPreProducts(preitem) {
-        this.preProductsAry.push(preitem);
-      }
-    },
+
 }
 </script>

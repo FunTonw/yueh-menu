@@ -2,7 +2,7 @@
   <div class="bg-white rounded-bottom page-rounded">
     <div class="page-table p-3">
       <div class="carousel slide h-100 w-100 carousel-dark " ref="myCarousel" id="myCarousel">
-        <div class="carousel-inner" ref="inner">
+        <div class="carousel-inner px-lg-5" ref="inner">
           <div class="carousel-item" v-for="page in items" :key="page.id">
           <div class="container">
             <div class="row row-cols-3 g-3">
@@ -15,6 +15,14 @@
           </div>
           </div>
         </div>
+          <button class="carousel-control-prev display-none-btn" type="button" data-bs-target="#myCarousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+          </button>
+          <button class="carousel-control-next display-none-btn" type="button" data-bs-target="#myCarousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+          </button>
       </div>
     </div>
     <div class="d-flex justify-content-center align-items-center py-3" v-if="Object.keys(this.preitem).length != 0">
@@ -39,10 +47,16 @@
   .page-rounded{
     border-top-right-radius: 0.25rem !important
   }
+  .display-none-btn{
+    display: none;
+  }
   @media screen and (min-width: 992px){
     .page-table{
-      min-height: 85vh;
+      min-height: 75vh;
       border-top-right-radius: 0.25rem 
+    }
+    .display-btn{
+      display: unset;
     }
   }
 </style>
@@ -90,12 +104,13 @@ export default {
       this.$emitter.emit('getItem', this.preitem);
     },
     uploadbtn(items, type) {
+      const countForPageWidth = (document.documentElement.scrollWidth < 992) ? 9 : 18;
       this.items = [];
       let val = (type) ? items[type] : items;
       // 若btn超過9個, 就以9個為單位 拆分頁數
-        if (val.length > 9) {
-          for (let i = 0; i < val.length ; i += 9) {
-            this.items.push(val.slice(i,i+9))
+        if (val.length > countForPageWidth ) {
+          for (let i = 0; i < val.length ; i += countForPageWidth) {
+            this.items.push(val.slice(i,i+countForPageWidth))
           }
         } else {
           this.items.push(val);
