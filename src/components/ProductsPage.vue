@@ -118,6 +118,7 @@ export default {
     },
     send() {
       this.preitem.productId = new Date().getTime();
+      this.preitem.count = 1;
       this.$emitter.emit('pushpreitem', this.preitem);
       this.clear();
     },

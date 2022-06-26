@@ -13,6 +13,16 @@
                 {{(reItem.type === 'riceball') ? '飯糰類型' : '飲料類型' }}
               </label>
               <h1>{{reItem.title}}</h1>
+              <div class="d-flex">
+                <button  class="border border-end-0 px-1 text-dark rounded-start" type="button" @click="plusAndMinusCount('plus')">
+                  <i class="fa-solid fa-plus"></i>
+                </button>
+                <p class="border border-1 border-muted px-3 m-0">{{reItem.count}}</p>
+                <button  class="border border-start-0 px-1 text-dark rounded-end" :disabled="this.reItem.count <= 1" type="button" @click="plusAndMinusCount('minus')">
+                  <i class="fa-solid fa-minus" ></i>
+                </button>
+              </div>
+
             </div>
             <div>
             </div>
@@ -43,7 +53,7 @@
             </div>
             <div class="mb-2">
               <label for="item-price">價格</label>
-              <p>{{reItem.price}}</p>
+              <p>{{reItem.price * reItem.count}}</p>
             </div>
           </form>
         </div>
@@ -85,6 +95,16 @@ export default {
       } else if (!e.target.checked) {
         this.reItem.price -= val.price
       }
+    },
+    plusAndMinusCount(val) {
+      if(val === 'plus'){
+        this.reItem.count ++
+      } else if(val === 'minus'){
+        this.reItem.count --
+      } else {
+        return this.reItem;
+      }
+      console.log(this.reItem.count);
     },
     pushReItem() {
       this.$emit('getReItem', this.reItem);

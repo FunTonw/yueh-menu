@@ -4,7 +4,9 @@
     <div class=" col-12 col-lg-8">
     <div class=" bg-white rounded-bottom p-3 overflow-scroll number-rounded" style="height: 85vh;">
       <div class="d-flex flex-column-reverse">
-    <div class="card mb-3" :class="{'border-danger': product.paid}" v-for="product, index in main" :key="index">
+    <div class="card mb-3"
+    :class="{'border-danger': product.paid, 'text-danger': product.paid}"
+    v-for="product, index in main" :key="index">
       <div class="card-body" @click="paidToggle(product)">
         <h5 class="card-title">
           <span>單號：{{product.number}}</span>
@@ -17,7 +19,7 @@
           <ul class="list-group list-group-flush">
             <li class="list-group-item" v-for="item, index in product.products" :key="`${index}_product`">
               <div>
-                <p class="m-0 fs-4">{{item.title}} 1 顆</p>
+                <p class="m-0 fs-4">{{item.title + ' ' + item.count + ' 份'}}</p>
                 <p class="m-0">
                   <span v-for="topping, index in item.addToppings" :key="index">
                   {{`+ ${topping} `}}
@@ -82,7 +84,6 @@ export default {
       product.paid = !product.paid;
     },
     getTimeId(id) {
-      console.log(id);
       let date = new Date(id);
       return `${date.getFullYear()}-${date.getMonth() +1}-${date.getDate()} ${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`
     },

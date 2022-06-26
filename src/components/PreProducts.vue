@@ -22,14 +22,14 @@
         :modules="modules">
           <SwiperSlide>
             <div class="d-flex flex-column lh-1" v-on:click="reload(item)">
-              <p class="fs-5 mb-2"><span>{{parseInt(index) + 1}}.</span>{{item.title + ((!item.count) ? ' 1 顆' :`${item.count} 顆`)}}</p>
+              <p class="fs-5 mb-2"><span>{{parseInt(index) + 1}}.</span>{{item.title + ' ' + item.count + ' 份'}}</p>
               <div class="topping-list lh-1 fs-6">
                  <span v-for="topping, num in item.addToppings" :key="num">
                   + {{topping}}
                 </span>
               </div>
               <hr class="text-success rounded-1 m-1" style="padding-top: 3px;">
-              <p class="total align-self-end fs-4">$ {{item.price}}</p>
+              <p class="total align-self-end fs-4">$ {{item.price * item.count}}</p>
             </div>
           </SwiperSlide>
           <SwiperSlide>
@@ -88,7 +88,7 @@ export default {
     countPrice: function() {
       let price = 0;
       this.PreProducts.forEach(ele => {
-        price += ele.price;
+        price += ele.price * ele.count;
       });
       return price
     }
