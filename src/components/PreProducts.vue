@@ -2,8 +2,9 @@
 <div>
   <div class="bg-white rounded-3 p-3 overflow-scroll mb-3 pre-products-table">
     <ul class="p-0">
-      <li v-for="item, index in PreProducts" :key="index">
+      <li v-for="item, index in PreProducts" :key="item.productId">
         <Swiper
+        @swiper="onSwiper"
         :grabCursor="true"
         :effect="'creative'"
         :creativeEffect="{
@@ -69,9 +70,9 @@
 
 export default {
       setup() {
-      return {
-        modules: [EffectCreative],
-      };
+        return {
+          modules: [EffectCreative],
+        };
       },
   components :{
     ReloadModal,
@@ -82,6 +83,7 @@ export default {
     return {
       pushItem: {},
       PreProducts: [],
+      swiper: null,
     };
   },
   computed: {
@@ -94,6 +96,9 @@ export default {
     }
   },
   methods: {
+    onSwiper(swiper) {
+      this.swiper = swiper;
+    },
     postPreProducts() {
       let url ="https://cors-product.herokuapp.com/https://yueh-menu.herokuapp.com/numberapi/number/main";
       let myHeaders = new Headers();
@@ -128,11 +133,12 @@ export default {
       this.$refs.reloadModal.hideModal();
     },
     del(val) {
-      let index = this.PreProducts.findIndex((ele) => {
+      let index = this.PreProducts.findIndex(ele => 
         //如果可以 break; 最好
         ele.productId === val.productId
-      })
-      this.PreProducts.splice(index-1, 1);
+      )
+      console.log(this.swiper.activeIndex)
+      this.PreProducts.splice(index, 1);
     },
     reload(item) {
       this.pushItem = item;
