@@ -7,7 +7,8 @@
         <li class="nav-item col-6 col-lg-12" role="presentation">
           <router-link to="/" custom v-slot="{ navigate }">
             <button @click="navigate"
-            class="nav-link active link-secondary w-100 h-100 border-0 nav-radius"
+            class="nav-link link-secondary w-100 h-100 border-0 nav-radius"
+            :class="{'active': this.$route.path === '/'}"
             data-bs-toggle="tab" type="button">
               <span class="text-write">菜單</span>
             </button>
@@ -17,6 +18,7 @@
           <router-link to="/numberpage" custom v-slot="{ navigate }">
             <button @click="navigate"
             class="nav-link link-secondary w-100 h-100 border-0 nav-radius"
+            :class="{'active': this.$route.path === '/numberpage'}"
             data-bs-toggle="tab" type="button">
               <span class="text-write">今日菜單</span>
             </button>

@@ -21,6 +21,7 @@
                 <button  class="border border-start-0 px-1 text-dark rounded-end" :disabled="this.reItem.count <= 1" type="button" @click="plusAndMinusCount('minus')">
                   <i class="fa-solid fa-minus" ></i>
                 </button>
+                <p class="m-0"> 份</p>
               </div>
 
             </div>
