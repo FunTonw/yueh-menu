@@ -2,7 +2,7 @@
 <div class="container p-0">
   <div class="row g-1">
     <div class=" col-12 col-lg-8">
-    <div class=" bg-white rounded-bottom p-3 overflow-scroll number-rounded" style="height: 85vh;">
+    <div class=" bg-white rounded-bottom p-3 overflow-auto number-rounded" style="height: 85vh;">
       <div class="d-flex flex-column-reverse">
     <div class="card mb-3"
     :class="{'border-danger': product.paid, 'text-danger': product.paid}"
